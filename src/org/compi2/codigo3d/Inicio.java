@@ -13,7 +13,8 @@ import org.compi2.codigo3d.parser.scanner;
 public class Inicio extends javax.swing.JFrame {
 
     public Inicio() {
-        System.out.println("holaa solo para probar :D...");
+        
+        System.out.println("ya Pam....");
         initComponents();
     }
 

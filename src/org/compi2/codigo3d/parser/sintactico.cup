@@ -48,7 +48,7 @@ inicial     ::= {: ControlC3D.reiniciar(); :} logica:exp
                        ControlC3D.agregarC3D("//ULTIMO VALOR: "+exp.getCad());
                     :};
 
-logica      ::=  logica:izq AND {:System.out.println(izq.getEV()+":\n");:} logica:der
+logica      ::=  logica:izq AND {:  String c3d =izq.getEV()+":\n";System.out.println(c3d);ControlC3D.agregarC3D(c3d);:} logica:der
                 {: 
                         String EV = der.getEV();
                         String EF = izq.getEF()+","+der.getEF();
@@ -58,7 +58,7 @@ logica      ::=  logica:izq AND {:System.out.println(izq.getEV()+":\n");:} logic
                         ControlC3D.agregarC3D(c3d);
                         RESULT = new NodoC3D(EV,EF,der.getCad());
                 :}
-                |logica:izq OR{:System.out.println(izq.getEF()+":\n");:} logica:der
+                |logica:izq OR{:String c3d =izq.getEF()+":\n";System.out.println(c3d);ControlC3D.agregarC3D(c3d);:} logica:der
                 {: 
                         String EV = izq.getEV()+","+der.getEV();
                         String EF = der.getEF();
@@ -79,6 +79,7 @@ logica      ::=  logica:izq AND {:System.out.println(izq.getEV()+":\n");:} logic
                         ControlC3D.agregarC3D(c3d);
                         RESULT = new NodoC3D(EV,EF,der.getCad());
                 :}
+                | PAR_IZQ logica:log PAR_DER {:RESULT = new NodoC3D(log.getEV(),log.getEF(),log.getCad());  :}
                 |rela:der
                  {: 
                        
@@ -95,7 +96,7 @@ rela        ::= expresion:izq operador:op expresion:der
                         String c3d = "if ("+izq.getCad() + op + der.getCad() +") goto " +EV+ ";\n" +"goto "+EF+"\n";
                         System.out.println(c3d);
                         ControlC3D.agregarC3D(c3d);
-                        // ControlC3D.agregarC3D(c3d);
+                        
                         RESULT = new NodoC3D(EV,EF,der.getCad()); 
                 :}
                 ;
@@ -133,7 +134,7 @@ expresion   ::= expresion:izq MAS expresion:der
                     {: 
                         String temp = ControlC3D.generaTemp();
                         String c3d = temp + " = " + izq.getCad() + " / " + der.getCad() + ";\n";
-                         System.out.println(c3d);
+                        System.out.println(c3d);
                         ControlC3D.agregarC3D(c3d);
                         RESULT = new NodoC3D(temp); 
                     :}

@@ -42,8 +42,7 @@ inicial     ::= {: ControlC3D.reiniciar(); :} logica:exp
                     {: 
                         RESULT = exp;
                       //  ControlC3D.agregarC3D("//ltimo valor: " + exp.getCad());
-
-                        //
+                     
                        System.out.println("//ULTIMO VALOR: "+exp.getCad());
                        ControlC3D.agregarC3D("//ULTIMO VALOR: "+exp.getCad());
                     :};
